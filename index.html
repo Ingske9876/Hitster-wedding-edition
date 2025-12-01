@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Muziekquiz</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      text-align: center;
+      gap: 1rem;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <p>Druk op play om het fragment te horen 🎵</p>
+  <button id="playBtn">▶️ Afspelen / pauzeren</button>
+
+  <audio id="player"></audio>
+
+  <script>
+    // Haal de ?id= uit de URL (bijv. .../index.html?id=1)
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id") || "1";
+
+    // Koppel id's aan jouw audiobestanden
+    const tracks = {
+      "1": "Yves Berendse - Terug In De Tijd (Officiële Video).mp3",
+      "2": "track2.mp3",
+      "3": "track3.mp3"
+      // voeg hier meer toe als je meer fragmenten hebt
+      // "4": "track4.mp3",
+      // "5": "track5.mp3",
+    };
+
+    const audio = document.getElementById("player");
+    audio.src = tracks[id] || tracks["1"]; // fallback naar 1
+
+    const btn = document.getElementById("playBtn");
+    btn.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    });
+  </script>
+</body>
+</html>
